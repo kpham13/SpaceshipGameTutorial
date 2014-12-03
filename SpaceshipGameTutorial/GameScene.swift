@@ -20,7 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let backgroundVelocity : CGFloat = 3.0
     let missileVelocity : CGFloat = 5.0
-
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         self.backgroundColor = SKColor.whiteColor()
@@ -150,69 +150,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if (firstBody.categoryBitMask & UInt32(shipCategory)) != 0 && (secondBody.categoryBitMask & UInt32(obstacleCategory)) != 0 {
             ship.removeFromParent()
+            let reveal = SKTransition.flipHorizontalWithDuration(0.5)
+            let scene = GameOverScene(size: self.size)
+            self.view?.presentScene(scene, transition: reveal)
         }
     }
 
 }
-
-/*
-var reveal = SKTransition.flipHorizontalWithDuration(0.5)
-var gameOverScene : SKScene = GameOverScene(size: self.size)
-self.view?.presentScene(gameOverScene, transition: reveal)
-var ship = SKSpriteNode()
-var actionMoveUp = SKAction()
-var actionMoveDown = SKAction()
-var lastUpdateTime : NSTimeInterval = 0.0
-var deltaTime : NSTimeInterval = 0.0
-var lastMissileAdded : NSTimeInterval = 0.0
-
-let shipCategory = 0x1 << 1
-let obstacleCategory = 0x1 << 2
-
-var backgroundSpeed : CGFloat = 3.0
-var missileSpeed : CGFloat = 5.0
-//    var currentTime = 0.0
-//    var previousTime = 0.0
-//    var deltaTime = 0.0
-
-
-
-override func update(currentTime: CFTimeInterval) {
-/* Called before each frame is rendered */
-
-//        self.currentTime = currentTime
-//        deltaTime = self.currentTime - self.previousTime
-//        self.previousTime = currentTime
-if currentTime - self.lastMissileAdded > 1 {
-self.lastMissileAdded = currentTime + 1
-self.addMissile()
-}
-//        -(void)update:(CFTimeInterval)currentTime {
-//
-//            if (_lastUpdateTime)
-//            {
-//                _dt = currentTime - _lastUpdateTime;
-//            }
-//            else
-//            {
-//                _dt = 0;
-//            }
-//            _lastUpdateTime = currentTime;
-//
-//            if( currentTime - _lastMissileAdded > 1)
-//            {
-//                _lastMissileAdded = currentTime + 1;
-//                [self addMissile];
-//            }
-//
-//            [self moveBg];
-//            [self moveObstacle];
-//
-//        }
-
-self.moveBackground()
-self.moveObstacle()
-}
-
-
-*/
