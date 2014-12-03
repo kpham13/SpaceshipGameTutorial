@@ -15,9 +15,10 @@
 		0A5157991A296BD200E153D9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A5157981A296BD200E153D9 /* Images.xcassets */; };
 		0A51579C1A296BD200E153D9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A51579A1A296BD200E153D9 /* LaunchScreen.xib */; };
 		0A5157A81A296BD200E153D9 /* SpaceshipGameTutorialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5157A71A296BD200E153D9 /* SpaceshipGameTutorialTests.swift */; };
-		0A5157B51A2976DE00E153D9 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5157B21A2976DE00E153D9 /* bg.png */; };
 		0A5157B61A2976DE00E153D9 /* red-missile.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5157B31A2976DE00E153D9 /* red-missile.png */; };
 		0A5157B71A2976DE00E153D9 /* spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5157B41A2976DE00E153D9 /* spaceship.png */; };
+		0A5157EB1A299D2C00E153D9 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A5157EA1A299D2C00E153D9 /* bg.png */; };
+		0A8664D21A2FB4A9004B73AF /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8664D11A2FB4A9004B73AF /* GameOverScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,9 +44,10 @@
 		0A5157A11A296BD200E153D9 /* SpaceshipGameTutorialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceshipGameTutorialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A5157A61A296BD200E153D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A5157A71A296BD200E153D9 /* SpaceshipGameTutorialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceshipGameTutorialTests.swift; sourceTree = "<group>"; };
-		0A5157B21A2976DE00E153D9 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		0A5157B31A2976DE00E153D9 /* red-missile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-missile.png"; sourceTree = "<group>"; };
 		0A5157B41A2976DE00E153D9 /* spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaceship.png; sourceTree = "<group>"; };
+		0A5157EA1A299D2C00E153D9 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		0A8664D11A2FB4A9004B73AF /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				0A51578D1A296BD200E153D9 /* AppDelegate.swift */,
+				0A8664D11A2FB4A9004B73AF /* GameOverScene.swift */,
 				0A51578F1A296BD200E153D9 /* GameScene.sks */,
 				0A5157911A296BD200E153D9 /* GameScene.swift */,
 				0A5157931A296BD200E153D9 /* GameViewController.swift */,
@@ -128,7 +131,7 @@
 		0A5157B11A2976DE00E153D9 /* Game Art */ = {
 			isa = PBXGroup;
 			children = (
-				0A5157B21A2976DE00E153D9 /* bg.png */,
+				0A5157EA1A299D2C00E153D9 /* bg.png */,
 				0A5157B31A2976DE00E153D9 /* red-missile.png */,
 				0A5157B41A2976DE00E153D9 /* spaceship.png */,
 			);
@@ -217,7 +220,7 @@
 			files = (
 				0A5157B61A2976DE00E153D9 /* red-missile.png in Resources */,
 				0A5157B71A2976DE00E153D9 /* spaceship.png in Resources */,
-				0A5157B51A2976DE00E153D9 /* bg.png in Resources */,
+				0A5157EB1A299D2C00E153D9 /* bg.png in Resources */,
 				0A51579C1A296BD200E153D9 /* LaunchScreen.xib in Resources */,
 				0A5157991A296BD200E153D9 /* Images.xcassets in Resources */,
 				0A5157901A296BD200E153D9 /* GameScene.sks in Resources */,
@@ -241,6 +244,7 @@
 			files = (
 				0A5157921A296BD200E153D9 /* GameScene.swift in Sources */,
 				0A5157941A296BD200E153D9 /* GameViewController.swift in Sources */,
+				0A8664D21A2FB4A9004B73AF /* GameOverScene.swift in Sources */,
 				0A51578E1A296BD200E153D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +437,7 @@
 				0A5157AD1A296BD200E153D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A5157AE1A296BD200E153D9 /* Build configuration list for PBXNativeTarget "SpaceshipGameTutorialTests" */ = {
 			isa = XCConfigurationList;
@@ -441,6 +446,7 @@
 				0A5157B01A296BD200E153D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
