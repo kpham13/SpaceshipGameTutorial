@@ -13,17 +13,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ship = SKSpriteNode()
     var actionMoveUp = SKAction()
     var actionMoveDown = SKAction()
+    var lastMissileAdded : NSTimeInterval = 0.0
     
     let shipCategory = 0x1 << 1
     let obstacleCategory = 0x1 << 2
     
     let backgroundVelocity : CGFloat = 3.0
+    let missileVelocity : CGFloat = 5.0
 
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
         self.backgroundColor = SKColor.whiteColor()
         self.initializingScrollingBackground()
         self.addShip()
+        self.addMissile()
         
         // Making self delegate of physics world
         self.physicsWorld.gravity = CGVectorMake(0, 0)
@@ -50,8 +53,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
+        if currentTime - self.lastMissileAdded > 1 {
+            self.lastMissileAdded = currentTime + 1
+            self.addMissile()
+        }
         
         self.moveBackground()
+        self.moveObstacle()
     }
     
     func addShip() {
@@ -97,5 +105,114 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         })
     }
+    
+    func addMissile() {
+        // Initializing spaceship node
+        var missile = SKSpriteNode(imageNamed: "red-missile")
+        missile.setScale(0.15)
+        
+        // Adding SpriteKit physics body for collision detection
+        missile.physicsBody = SKPhysicsBody(rectangleOfSize: missile.size)
+        missile.physicsBody?.categoryBitMask = UInt32(obstacleCategory)
+        missile.physicsBody?.dynamic = true
+        missile.physicsBody?.contactTestBitMask = UInt32(shipCategory)
+        missile.physicsBody?.collisionBitMask = 0
+        missile.physicsBody?.usesPreciseCollisionDetection = true
+        missile.name = "missile"
+        
+        // Selecting random y position for missile
+        var random : CGFloat = CGFloat(arc4random_uniform(300))
+        missile.position = CGPointMake(self.frame.size.width + 20, random)
+        self.addChild(missile)
+    }
+    
+    func moveObstacle() {
+        self.enumerateChildNodesWithName("missile", usingBlock: { (node, stop) -> Void in
+            if let obstacle = node as? SKSpriteNode {
+                obstacle.position = CGPoint(x: obstacle.position.x - self.missileVelocity, y: obstacle.position.y)
+                if obstacle.position.x < 0 {
+                    obstacle.removeFromParent()
+                }
+            }
+        })
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        var firstBody = SKPhysicsBody()
+        var secondBody = SKPhysicsBody()
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if (firstBody.categoryBitMask & UInt32(shipCategory)) != 0 && (secondBody.categoryBitMask & UInt32(obstacleCategory)) != 0 {
+            ship.removeFromParent()
+        }
+    }
 
 }
+
+/*
+var reveal = SKTransition.flipHorizontalWithDuration(0.5)
+var gameOverScene : SKScene = GameOverScene(size: self.size)
+self.view?.presentScene(gameOverScene, transition: reveal)
+var ship = SKSpriteNode()
+var actionMoveUp = SKAction()
+var actionMoveDown = SKAction()
+var lastUpdateTime : NSTimeInterval = 0.0
+var deltaTime : NSTimeInterval = 0.0
+var lastMissileAdded : NSTimeInterval = 0.0
+
+let shipCategory = 0x1 << 1
+let obstacleCategory = 0x1 << 2
+
+var backgroundSpeed : CGFloat = 3.0
+var missileSpeed : CGFloat = 5.0
+//    var currentTime = 0.0
+//    var previousTime = 0.0
+//    var deltaTime = 0.0
+
+
+
+override func update(currentTime: CFTimeInterval) {
+/* Called before each frame is rendered */
+
+//        self.currentTime = currentTime
+//        deltaTime = self.currentTime - self.previousTime
+//        self.previousTime = currentTime
+if currentTime - self.lastMissileAdded > 1 {
+self.lastMissileAdded = currentTime + 1
+self.addMissile()
+}
+//        -(void)update:(CFTimeInterval)currentTime {
+//
+//            if (_lastUpdateTime)
+//            {
+//                _dt = currentTime - _lastUpdateTime;
+//            }
+//            else
+//            {
+//                _dt = 0;
+//            }
+//            _lastUpdateTime = currentTime;
+//
+//            if( currentTime - _lastMissileAdded > 1)
+//            {
+//                _lastMissileAdded = currentTime + 1;
+//                [self addMissile];
+//            }
+//
+//            [self moveBg];
+//            [self moveObstacle];
+//
+//        }
+
+self.moveBackground()
+self.moveObstacle()
+}
+
+
+*/
