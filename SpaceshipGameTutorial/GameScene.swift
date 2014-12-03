@@ -13,28 +13,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ship = SKSpriteNode()
     var actionMoveUp = SKAction()
     var actionMoveDown = SKAction()
-    var lastUpdateTime : NSTimeInterval = 0.0
-    var deltaTime : NSTimeInterval = 0.0
-    var lastMissileAdded : NSTimeInterval = 0.0
-    // var currentTime = 0.0
-    // var previousTime = 0.0
-    // var deltaTime = 0.0
     
     let shipCategory = 0x1 << 1
     let obstacleCategory = 0x1 << 2
     
-    var backgroundSpeed : CGFloat = 3.0
-    var missileSpeed : CGFloat = 5.0
-    
-    // static vector math methods and constants
-//    static const float BG_VELOCITY = 100.0; //Velocity with which our background is going to move
-//    static inline CGPoint CGPointAdd(const CGPoint a, const CGPoint b) {
-//        return CGPointMake(a.x + b.x, a.y + b.y);
-//    }
-//    
-//    static inline CGPoint CGPointMultiplyScalar(const CGPoint a, const CGFloat b) {
-//        return CGPointMake(a.x * b, a.y * b);
-//    }
+    let backgroundVelocity : CGFloat = 3.0
 
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
@@ -67,33 +50,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
    
     override func update(currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
-
-//        self.currentTime = currentTime
-//        deltaTime = self.currentTime - self.previousTime
-//        self.previousTime = currentTime
-        
-//        -(void)update:(CFTimeInterval)currentTime {
-//            
-//            if (_lastUpdateTime)
-//            {
-//                _dt = currentTime - _lastUpdateTime;
-//            }
-//            else
-//            {
-//                _dt = 0;
-//            }
-//            _lastUpdateTime = currentTime;
-//            
-//            if( currentTime - _lastMissileAdded > 1)
-//            {
-//                _lastMissileAdded = currentTime + 1;
-//                [self addMissile];
-//            }
-//            
-//            [self moveBg];
-//            [self moveObstacle];
-//            
-//        }
         
         self.moveBackground()
     }
@@ -132,7 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func moveBackground() {
         self.enumerateChildNodesWithName("background", usingBlock: { (node, stop) -> Void in
             if let bg = node as? SKSpriteNode {
-                bg.position = CGPoint(x: bg.position.x - self.backgroundSpeed, y: bg.position.y)
+                bg.position = CGPoint(x: bg.position.x - self.backgroundVelocity, y: bg.position.y)
                 
                 // Checks if bg node is completely scrolled off the screen, if yes, then puts it at the end of the other node.
                 if bg.position.x <= -bg.size.width {
