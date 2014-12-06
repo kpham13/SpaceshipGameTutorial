@@ -29,6 +29,7 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Presenting scene without using GameScene.sks
         let skView = self.view as SKView
         let myScene = GameScene(size: skView.frame.size)
         skView.presentScene(myScene)
@@ -48,7 +49,6 @@ class GameViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
     }
 
     override func prefersStatusBarHidden() -> Bool {
