@@ -107,7 +107,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
   
   func addMissile() {
-      // Initializing spaceship node
+      // Initializing missile node
       var missile = SKSpriteNode(imageNamed: "red-missile")
       missile.setScale(0.15)
       
