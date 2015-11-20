@@ -33,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       self.physicsWorld.contactDelegate = self
   }
   
-  override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
       /* Called when a touch begins */
       
       for touch: AnyObject in touches {
@@ -108,7 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   
   func addMissile() {
       // Initializing missile node
-      var missile = SKSpriteNode(imageNamed: "red-missile")
+      let missile = SKSpriteNode(imageNamed: "red-missile")
       missile.setScale(0.15)
       
       // Adding SpriteKit physics body for collision detection
@@ -121,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       missile.name = "missile"
       
       // Selecting random y position for missile
-      var random : CGFloat = CGFloat(arc4random_uniform(300))
+      let random : CGFloat = CGFloat(arc4random_uniform(300))
       missile.position = CGPointMake(self.frame.size.width + 20, random)
       self.addChild(missile)
   }
