@@ -16,7 +16,7 @@ class GameOverScene: SKScene {
     self.backgroundColor = SKColor.whiteColor()
     
     let message = "Game over"
-    var label = SKLabelNode(fontNamed: "Chalkduster")
+    let label = SKLabelNode(fontNamed: "Chalkduster")
     label.text = message
     label.fontSize = 40
     label.fontColor = SKColor.blackColor()
@@ -24,7 +24,7 @@ class GameOverScene: SKScene {
     self.addChild(label)
     
     let replayMessage = "Replay Game"
-    var replayButton = SKLabelNode(fontNamed: "Chalkduster")
+    let replayButton = SKLabelNode(fontNamed: "Chalkduster")
     replayButton.text = replayMessage
     replayButton.fontColor = SKColor.blackColor()
     replayButton.position = CGPointMake(self.size.width/2, 50)
@@ -32,7 +32,7 @@ class GameOverScene: SKScene {
     self.addChild(replayButton)
   }
   
-  override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     for touch: AnyObject in touches {
       let location = touch.locationInNode(self)
       let node = self.nodeAtPoint(location)
